@@ -1,0 +1,359 @@
+
+
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Bebas+Neue&family=Inter&display=swap');
+/* 
+font-family: 'Barlow', sans-serif;
+font-family: 'Bebas Neue', cursive;
+font-family: 'Inter', sans-serif;
+*/
+:root{
+  --green: #00D700;
+  --dgreen: #00aa00;
+  --gray: #727272;
+    --lgray: #868686;
+    --bg: #ffffff;
+    --darkgray: #000;
+    --w: #ffffff;
+    --red: red;
+    --dark: #000;
+    --light: #f5f5f5;
+
+}
+html{
+  scroll-behavior: smooth;
+}
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /*-webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; */
+}
+a{
+  text-decoration: none;
+}
+.loader{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+footer{
+  background-color: var(--dark);
+  font-size: 12px;
+  text-align: center;
+  padding: 40px;
+  display: block;
+  color: var(--w);
+}
+footer p{
+  letter-spacing: 2px;
+}
+body{
+    background-color: var(--bg);
+    position: relative;
+    font-family: 'Bebas Neue', cursive;
+}
+section{
+  margin: 0;
+  padding: 0;
+}
+.nav_logo{
+    box-sizing: border-box;
+    max-height: 60px;
+}
+nav{
+    max-height: 80px;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--darkgray);
+    width: 100%;
+    display: block;
+    position: fixed;
+    z-index: 400;
+    top: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+}
+nav.shadow{
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);   
+}
+del{
+  color: var(--lgray);
+}
+.btn_nb{
+    /*border: 1px solid var(--gray);*/
+    color: var(--w);
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.4s;
+    font-size: 18px;
+}
+.cont_nav .btn_nb{
+  margin-left: 10px;
+}
+.btn_nb:hover{
+    /*border: 1px solid var(--green);*/
+    color: var(--green);
+
+}
+.btn_nb:active{
+    color: var(--green);
+}
+.cont_nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 80%;
+    width: 100%;
+}
+.banner{
+  margin-top: 80px;
+  display: block;
+  align-items: center;
+}
+
+.banner_img{
+  max-width: 100%;
+  height: fit-content;
+  margin: auto;
+}
+.banner_txt{
+  position: absolute;
+  color: white;
+  margin: auto;
+  width: 100%;
+  z-index: 1;
+  
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 60px;
+  text-align: center;
+  background-color: red;
+}
+.content{
+  display: flex;
+  width: 100%;
+}
+.sidenav{
+  max-width: 15%;
+  width: 100%;
+  padding: 20px;
+  border-right:  2px solid var(--darkgray);
+}
+.box{
+  width: 100%;
+  max-width: 85%;
+  padding: 20px;
+  min-height: 50vh;
+}
+.box h2{
+  font-weight: 400;
+  font-size: 40px;
+}
+select{
+  border: 1px solid var(--darkgray);
+  background-color: var(--w);
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: 200;
+  font-family: 'Bebas Neue', cursive;
+}
+.options{
+  display: flex;
+  width: 100%;
+  align-items: right;
+  justify-content: end;
+}
+.options select, .option input{
+  margin-right: 10px;
+}
+input{
+  border-radius: 10px;
+  border: 1px solid var(--darkgray);
+  padding: 5px 10px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 18px;
+}
+.sidenav_title{
+  font-size: 28px;
+}
+.product_card{
+  min-width: 325px;
+  max-width: 325px; /* Esto hace que cada tarjeta ocupe el 25% del ancho del contenedor, menos el padding izquierdo y derecho del contenedor (20px cada uno) */
+  margin: 0.5rem;
+  background-color: var(--light);
+  /*border: 1px solid #ccc;*/
+  text-align: center;
+  padding: 1rem;
+  flex-direction: row;
+  transition: 0.3s;
+}
+.cards_container{
+  display:flex;
+  flex-wrap: wrap;
+}
+.product_card img{
+  max-width: 325px;
+}
+.product_img{
+  max-height: 325px;
+  min-height: 325px;
+  display: flex;
+  align-items: center;
+}
+.product_info{
+  color: var(--darkgray);
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.product_desc{
+  color: var(--green);
+}
+.product_brand{
+  color: var(--gray);
+}
+.product_card:hover{
+  box-shadow: 0px 10px 15px #ccc;
+}
+
+
+/* SCRAPPING ELEMENTS */
+#bgImg{
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(9,0,0,0.5);
+  display: none;
+  z-index: 500;
+}
+#closeBtn{
+  color: var(--red);
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    right: 50%;
+    width: fit-content;
+    padding: 10px 30px;
+    display: none;
+    background-color: var(--darkgray);
+    border-radius: 20px;
+    z-index: 501;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    border: none;
+    font-weight: bold;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#closeBtn:hover{
+  background-color: var(--red);
+  color: var(--w);
+}
+#imgContainer{
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: fit-content;
+    max-height: 80%;
+    width: 70vw;
+    height: 70vh;
+    display: none;
+    z-index: 502;
+    /* background-color: cyan; */
+    transform: translate(-50%,-50%);
+
+}
+#imgTemp{
+  width: auto;
+  background-color: var(--darkgray);
+  /* padding: 10px; */
+    height: 100%;
+    margin: auto;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 50px;
+}
+h1.src_title{
+  font-size: 60px;
+  color: white;
+  background: black;
+  position: relative;
+  width: fit-content;
+  padding: 0 20px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+.src_title::before,
+.src_title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 15px solid transparent;
+}
+.src_title::before {
+  left: -30px;
+  border-right: 15px solid black;
+}
+.src_title::after {
+  right: -30px;
+  border-left: 15px solid black;
+}
+
+.src_card{
+  background-color: var(--light);
+  padding: 20px;
+  width: 100%;
+  max-width: 25%;
+  margin: 5px;
+}
+.src_prod_name{
+  color: var(--dark);
+  font-size: 26px;
+}
+.src_btn{
+  background-color: var(--green);
+  color: black;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+.src_btn:hover{
+  background-color: var(--dgreen);
+}
+.src_store{
+  color: var(--lgray);
+}
+
+.scrapping_prods{
+  margin-top: 100px;
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+#tablagral_filter{
+  margin-bottom: 10px;
+}
+td{
+  font-size: 18px;
+}

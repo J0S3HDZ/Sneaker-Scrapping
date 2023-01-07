@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import url("loaderstyle.css");
+/*@import url("inputstyle.css");
+@import url("tablestyle.css")
+@import url('stylemobile.css');
+ @import url('styletablet.css');
+*/
+html {
+    font-family: "Source Sans Pro", sans-serif;
+    scroll-behavior: smooth;
+}
+:root{
+    --green: #00D700;
+    --gray: #727272;
+    --lgray: #868686;
+    --bg: #F3F3F3;
+    --darkgray: #212121;
+    --w: #ffffff;
+    --red: red;
+    --dark: #000;
+    --darkb: rgb(33, 35, 48);
+}
+
+body {
+    background-color: var(--darkgray);
+    overflow: auto;
+}
+#gralLoader {
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+}
