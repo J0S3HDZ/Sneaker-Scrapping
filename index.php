@@ -34,7 +34,7 @@
     <nav id="nav">
         <div class="cont_nav">
             <div>
-                <img src="assets/img/dpp.png" alt="" class="nav_logo">
+                <!--<img src="assets/img/dpp.png" alt="" class="nav_logo">-->
             </div>
             <div style="float:right">
                 <a class="btn_nb" onclick="scrollToId('nike')">NIKE</a>
