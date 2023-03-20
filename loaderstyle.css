@@ -1,3 +1,14 @@
+:root{
+  --green: #00D700;
+  --gray: #727272;
+  --lgray: #868686;
+  --bg: #F3F3F3;
+  --darkgray: #212121;
+  --w: #ffffff;
+  --red: red;
+  --dark: #000;
+  --darkb: rgb(33, 35, 48);
+}
 *{
     margin:0;
     padding: 0;

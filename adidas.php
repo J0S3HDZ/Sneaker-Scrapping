@@ -45,8 +45,8 @@
         </div>
     </nav>
     <section class="content" style="display:block">
-        <div class="box" style="margin:auto;margin-top:100px">
-          <h1 id="nike" class="src_title">NIKE</h1>
+        <div class="box" style="margin:auto;margin-top:100px;border-top: 2px solid gray">
+          <h1 id="adidas" class="src_title">ADIDAS</h1>
           <table id="tablagral" class="display" cellspacing="0" width="100%">
             <thead>
               <tr>
@@ -60,60 +60,69 @@
               </tr>
             </thead>
             <tbody>      
-              
             <?php
-              $count = 60;
-              $anchor = 0;
-              $country = 'mx';
-              $country_language = 'es-419';
 
-              $urlp = "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=BBE480E26DAA83E45BDF5C1D37092E51&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(MX)%26filter%3Dlanguage(es-419)%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D24%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D24&language=es-419&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
-              $html_prods = file_get_contents($urlp);
-              $out_prods = json_decode($html_prods, true);
-              $total_prods = $out_prods['data']['products']['pages']['totalResources'];
+            $start = 0;  // Starting index
+            $count = 0;   // Total number of items
+            
+            // Proceso adidas
+            while (true) {
+                $url = "https://www.adidas.mx/api/plp/content-engine?query=calzado-outlet&start=$start";
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            
+                $html = curl_exec($curl);
+            
+                curl_close($curl);
+            
+                $data = json_decode($html, true);
+                $count = $data['raw']['itemList']['count'];
 
-              for($anchor; $anchor < $total_prods; $anchor+=60){
-                $url = "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=BBE480E26DAA83E45BDF5C1D37092E51&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(MX)%26filter%3Dlanguage(es-419)%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D$anchor%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D$count&language=es-419&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
+                if (isset($data['raw']['itemList']['items'])) {
+                  $items = $data['raw']['itemList']['items'];
+                } else {
+                  $items = [];
+                }
 
-                $html = file_get_contents($url);
-                $output = json_decode($html, true);
+              foreach($items as $item){
+                  $prc = str_replace("%","",$item['salePercentage']);
 
-                foreach ($output['data']['products']['products'] as $item) {
-                  $total = $item['price']['fullPrice'];
-                  $current = $item['price']['currentPrice'];
-                
-                  $discount = ($total - $current) / $total;
-                  $discount = floor($discount * 100);
-                
-                  if($discount >= 25 && $item['inStock'] == true){
+                  if($prc >= 25){
                     echo "<tr>";
-                    echo "<td title='Abrir imagen' onclick ='imgZoom(\"" . $item['images']['squarishURL'] . "\")' style='cursor:zoom-in;margin:auto;text-align:center'><img src=\"".$item['images']['squarishURL']."\" width='100' /></td>";
-                    echo "<td>".$item['title']."</td>";
-                    echo "<td>".$item['subtitle']."</td>";
-                    echo "<td style='color:var(--lgray);text-align:center'><s>".$total."</s></td>";
-                    echo "<td style='color:var(--green);text-align:center'>".$discount."%</td>";
-                    echo "<td>$".$item['price']['currentPrice']."</td>";
-                    $link = str_replace("{countryLang}","",$item['url']);
-                    echo "<td style='text-align:center;min-width:100px'><a target='_blank' href='https://www.nike.com/mx".$link."' class='src_btn'>VER PRODUCTO</a></td>";
+                    echo "<td title='Abrir imagen' onclick='imgZoom(\"" . $item['image']['src'] . "\")'><img src='" . $item['image']['src'] . "' style='cursor:zoom-in;max-width:100px;height:fit-content'></td>";
+                    echo "<td>".$item['displayName']."</td>";
+                    echo "<td>".$item['altText']."</td>";
+                    echo "<td style='text-align:center;color:var(--lgray)'>$<s>".$item['price']."</s></td>";
+                    echo "<td style='text-align:center;color:var(--green)'>".$item['salePercentage']."</td>";
+                    echo "<td style='text-align:center;'>$".$item['salePrice']."</td>";
+                    echo "<td style='text-align:center;min-width:100px'><a target='_blank' href='https://www.adidas.mx".$item['link']."' class='src_btn'>VER PRODUCTO</a></td>";
                     echo "</tr>";
                   }
+                  
+                }   
+                if ($start >= $count) {
+                  break;
                 }
-              }
-            ?>      
+                $start += 59;
+            }
+
+?>
+
             </tbody>
             <tfoot>
               <tr>
-                <th>IMAGEN</th>
+              <th>IMAGEN</th>
                 <th>NOMBRE</th>
                 <th>DESCRIPCION</th>
-                <th>DESCUENTO</th>
                 <th>PRECIO</th>
+                <th>DESCUENTO</th>
+                <th>TOTAL</th>
                 <th></th>
               </tr>
             </tfoot>
           </table>
         </div>
-        
 </section>
 
 <div id="bgImg" onclick="closeImg()"></div>
