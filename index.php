@@ -178,5 +178,5 @@ function closeImg(){
 </body>
 <footer>
   <p>Todos los derechos reservados a sus respectivos dueños.</p>
-  <p>Deportes Pepe &copy; <?php echo date('Y'); ?> | Dev by Psycho</p>
+  <p>&copy; <?php echo date('Y'); ?> | Dev by Psycho</p>
 </footer>

@@ -62,50 +62,52 @@
             <tbody>      
             <?php
 
-            $start = 0;  // Starting index
-            $count = 0;   // Total number of items
-            
-            // Proceso adidas
-            while (true) {
-                $url = "https://www.adidas.mx/api/plp/content-engine?query=calzado-outlet&start=$start";
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, $url);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            
-                $html = curl_exec($curl);
-            
-                curl_close($curl);
-            
-                $data = json_decode($html, true);
-                $count = $data['raw']['itemList']['count'];
+$start = 0;
+$count = 0;
 
-                if (isset($data['raw']['itemList']['items'])) {
-                  $items = $data['raw']['itemList']['items'];
-                } else {
-                  $items = [];
-                }
+while (true) {
+    $url = "https://www.adidas.mx/api/plp/content-engine?query=calzado-outlet&start=$start";
 
-              foreach($items as $item){
-                  $prc = str_replace("%","",$item['salePercentage']);
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $html = curl_exec($curl);
+    curl_close($curl);
 
-                  if($prc >= 25){
-                    echo "<tr>";
-                    echo "<td title='Abrir imagen' onclick='imgZoom(\"" . $item['image']['src'] . "\")'><img src='" . $item['image']['src'] . "' style='cursor:zoom-in;max-width:100px;height:fit-content'></td>";
-                    echo "<td>".$item['displayName']."</td>";
-                    echo "<td>".$item['altText']."</td>";
-                    echo "<td style='text-align:center;color:var(--lgray)'>$<s>".$item['price']."</s></td>";
-                    echo "<td style='text-align:center;color:var(--green)'>".$item['salePercentage']."</td>";
-                    echo "<td style='text-align:center;'>$".$item['salePrice']."</td>";
-                    echo "<td style='text-align:center;min-width:100px'><a target='_blank' href='https://www.adidas.mx".$item['link']."' class='src_btn'>VER PRODUCTO</a></td>";
-                    echo "</tr>";
-                  }
-                  
-                }   
-                if ($start >= $count) {
-                  break;
-                }
-                $start += 59;
-            }
+    $data = json_decode($html, true);
+
+    /* PROBLEM WHEN IS READING THE JSON API REQUEST */
+    $count = $data['raw']['itemList']['count'];
+    
+    if (isset($data['raw']['itemList']['items'])) {
+        $items = $data['raw']['itemList']['items'];
+    } else {
+        $items = [];
+    }
+
+    foreach ($items as $item) {
+        $prc = str_replace("%", "", $item['salePercentage']);
+
+        if ($prc >= 25) {
+            echo "<tr>";
+            echo "<td title='Abrir imagen' onclick='imgZoom(\"" . $item['image']['src'] . "\")'><img src='" . $item['image']['src'] . "' style='cursor:zoom-in;max-width:100px;height:fit-content'></td>";
+            echo "<td>".$item['displayName']."</td>";
+            echo "<td>".$item['altText']."</td>";
+            echo "<td style='text-align:center;color:var(--lgray)'>$<s>".$item['price']."</s></td>";
+            echo "<td style='text-align:center;color:var(--green)'>".$item['salePercentage']."</td>";
+            echo "<td style='text-align:center;'>$".$item['salePrice']."</td>";
+            echo "<td style='text-align:center;min-width:100px'><a target='_blank' href='https://www.adidas.mx".$item['link']."' class='src_btn'>VER PRODUCTO</a></td>";
+            echo "</tr>";
+        }
+    }
+
+    /*if ($start >= $count) {
+        break;
+    }*/
+    
+    $start += 59;
+    break;
+}
 
 ?>
 
@@ -187,5 +189,5 @@ function closeImg(){
 </body>
 <footer>
   <p>Todos los derechos reservados a sus respectivos dueños.</p>
-  <p>Deportes Pepe &copy; <?php echo date('Y'); ?> | Dev by Psycho</p>
+  <p> &copy; <?php echo date('Y'); ?> | Dev by Psycho</p>
 </footer>
