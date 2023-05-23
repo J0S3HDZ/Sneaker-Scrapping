@@ -67,14 +67,13 @@
               $country = 'mx';
               $country_language = 'es-419';
 
-              $urlp = "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=BBE480E26DAA83E45BDF5C1D37092E51&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(MX)%26filter%3Dlanguage(es-419)%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D24%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D24&language=es-419&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
+              $urlp = "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=00599D8669476509C2E14905CC1418B4&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(MX)%26filter%3Dlanguage(es-419)%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D96%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D24&language=es-419&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
               $html_prods = file_get_contents($urlp);
               $out_prods = json_decode($html_prods, true);
               $total_prods = $out_prods['data']['products']['pages']['totalResources'];
 
               for($anchor; $anchor < $total_prods; $anchor+=60){
-                $url = "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=BBE480E26DAA83E45BDF5C1D37092E51&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(MX)%26filter%3Dlanguage(es-419)%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D$anchor%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D$count&language=es-419&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
-
+                $url = $urlp;
                 $html = file_get_contents($url);
                 $output = json_decode($html, true);
 

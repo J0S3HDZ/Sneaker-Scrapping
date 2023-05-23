@@ -47,6 +47,7 @@
     <section class="content" style="display:block">
         <div class="box" style="margin:auto;margin-top:100px;border-top: 2px solid gray">
           <h1 id="adidas" class="src_title">ADIDAS</h1>
+          <h4 style="color:red">UPDATING API REQUEST</h4>
           <table id="tablagral" class="display" cellspacing="0" width="100%">
             <thead>
               <tr>
@@ -59,14 +60,15 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody>      
+            <tbody>     
+
             <?php
 
 $start = 0;
 $count = 0;
 
 while (true) {
-    $url = "https://www.adidas.mx/api/plp/content-engine?query=calzado-outlet&start=$start";
+    $url = "https://www.adidas.mx/api/plp/content-engine?query=calzado-mujer&start=$start";
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -77,7 +79,7 @@ while (true) {
     $data = json_decode($html, true);
 
     /* PROBLEM WHEN IS READING THE JSON API REQUEST */
-    $count = $data['raw']['itemList']['count'];
+    /*$count = $data['raw']['itemList']['count'];*/
     
     if (isset($data['raw']['itemList']['items'])) {
         $items = $data['raw']['itemList']['items'];
@@ -101,9 +103,6 @@ while (true) {
         }
     }
 
-    /*if ($start >= $count) {
-        break;
-    }*/
     
     $start += 59;
     break;
