@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falcon | Dashboard &amp; Web App Template</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+  <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+  <meta name="theme-color" content="#ffffff">
+  <script src="assets/js/config.js"></script>
+  <script src="vendors/simplebar/simplebar.min.js"></script>
+  <link href="vendors/simplebar/simplebar.min.css" rel="stylesheet">
+  <link href="assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
+  <link href="assets/css/theme.min.css" rel="stylesheet" id="style-default">
+  <link href="assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
+  <link href="assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+  <script src="./vendors/jquery/jquery.min.js"></script>
+  <script src="./vendors/datatables.net/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="./vendors/datatables.net-bs5/dataTables.bootstrap5.min.css">
+  <script src="./vendors/datatables.net-bs5/dataTables.bootstrap5.min.js"></script>
+
+  <script>
+    var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+    if (isRTL) {
+      var linkDefault = document.getElementById('style-default');
+      var userLinkDefault = document.getElementById('user-style-default');
+      linkDefault.setAttribute('disabled', true);
+      userLinkDefault.setAttribute('disabled', true);
+      document.querySelector('html').setAttribute('dir', 'rtl');
+    } else {
+      var linkRTL = document.getElementById('style-rtl');
+      var userLinkRTL = document.getElementById('user-style-rtl');
+      linkRTL.setAttribute('disabled', true);
+      userLinkRTL.setAttribute('disabled', true);
+    }
+  </script>
+</head>
+
+<body>
+  <!-- ===============================================-->
+  <!--    Main Content-->
+  <!-- ===============================================-->
+  <main class="main" id="top">
+    <div class="container" data-layout="container">
+      <script>
+        var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+        if (isFluid) {
+          var container = document.querySelector('[data-layout]');
+          container.classList.remove('container');
+          container.classList.add('container-fluid');
+        }
+      </script>
+      <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand-lg">
+        <a class="navbar-brand me-1 me-sm-3" href="../index.html">
+          <div class="d-flex align-items-center"><img class="me-2"
+              src="../assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
+              class="font-sans-serif text-primary">falcon</span></div>
+        </a>
+        <div class="collapse navbar-collapse scrollbar" id="navbarStandard">
+
+        </div>
+        <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
+          <li class="nav-item ps-2 pe-0">
+            <div class="dropdown theme-control-dropdown"><a
+                class="nav-link d-flex align-items-center dropdown-toggle fa-icon-wait fs-9 pe-1 py-0"
+                href="navbar-top.html#" role="button" id="themeSwitchDropdown" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><span class="fas fa-sun fs-7" data-fa-transform="shrink-2"
+                  data-theme-dropdown-toggle-icon="light"></span><span class="fas fa-moon fs-7"
+                  data-fa-transform="shrink-3" data-theme-dropdown-toggle-icon="dark"></span><span
+                  class="fas fa-adjust fs-7" data-fa-transform="shrink-2"
+                  data-theme-dropdown-toggle-icon="auto"></span></a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-caret border py-0 mt-3"
+                aria-labelledby="themeSwitchDropdown">
+                <div class="bg-white dark__bg-1000 rounded-2 py-2"><button
+                    class="dropdown-item d-flex align-items-center gap-2" type="button" value="light"
+                    data-theme-control="theme"><span class="fas fa-sun"></span>Light<span
+                      class="fas fa-check dropdown-check-icon ms-auto text-600"></span></button><button
+                    class="dropdown-item d-flex align-items-center gap-2" type="button" value="dark"
+                    data-theme-control="theme"><span class="fas fa-moon" data-fa-transform=""></span>Dark<span
+                      class="fas fa-check dropdown-check-icon ms-auto text-600"></span></button><button
+                    class="dropdown-item d-flex align-items-center gap-2" type="button" value="auto"
+                    data-theme-control="theme"><span class="fas fa-adjust" data-fa-transform=""></span>Auto<span
+                      class="fas fa-check dropdown-check-icon ms-auto text-600"></span></button></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="content">
+        <div class="row g-0">
+          <div class=" mb-3">
+            <div class="card v-lg-100">
+              <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
+                <h6 class="mb-0 py-1">FILTERS</h6>
+              </div>
+              <div class="card-body pb-0">
+                <div class="d-flex mb-3 hover-actions-trigger align-items-center justify-content-between">
+                  <div class="file-thumbnail">
+                    <img id="nike" class="border border-4 h-100 w-100 object-fit-cover rounded-2"
+                      onclick="nikeScrapper()" style="cursor: pointer;" src="assets/img/brand/nike.jpg"
+                      alt="Nike Logo" />
+                  </div>
+                  <div class="file-thumbnail">
+                    <img id="adidas" class="border border-4 h-100 w-100 object-fit-cover rounded-2" onclick="adidasScrapper()"
+                      style="cursor: pointer;" src="assets/img/brand/adias.png" alt="Adidas Logo" />
+                  </div>
+
+                  <div class="file-thumbnail">
+                    <img id="puma" class="border border-4 h-100 w-100 object-fit-cover rounded-2" onclick="pumaScrapper()"
+                      style="cursor: pointer;" src="assets/img/brand/puma.png" alt="Puma Logo" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row g-0">
+            <div class=" pe-lg-2 mb-3">
+              <div class="card h-lg-100 overflow-hidden">
+                <div class="card-header d-flex flex-between-center bg-body-tertiary py-2">
+                  <h6 class="mb-0 py-1">RESULTS</h6>
+                </div>
+                <div class="card-body p-2">
+                  <div class="table-responsive scrollbar">
+                    <table id="table" class="table table-dashboard fs-10 border-200" style="width: 100%;">
+                      <thead class="bg-body-tertiary">
+                        <tr>
+                          <th class="text-900">PRODUCT</th>
+                          <th class="text-900">NAME</th>
+                          <th class="text-900">DESCRIPTION</th>
+                          <th class="text-900 text-end">PRICE</th>
+                          <th class="text-900 text-end">DISCOUNT</th>
+                          <th class="text-900 text-end">FINAL PRICE</th>
+                          <th class="text-900 pe-x1 text-end" style="width: 8rem">MORE INFO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+            <div class="toast fade" id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header bg-primary text-white"><strong class="me-auto">Under Development</strong><small></small>
+                <div data-bs-theme="dark"><button class="btn-close" type="button" data-bs-dismiss="toast"
+                    aria-label="Close"></button></div>
+              </div>
+              <div class="toast-body">We are working to this new feature!</div>
+            </div>
+          </div>
+
+          <footer class="footer">
+            <div class="row g-0 justify-content-between fs-10 mt-4 mb-3">
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">Dev by Psycho using Falcon Template <span class="d-none d-sm-inline-block">|
+                  </span><br class="d-sm-none" /> 2023 &copy;</p>
+              </div>
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">v2.0.0</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+  </main>
+  <script src="vendors/popper/popper.min.js"></script>
+  <script src="vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="vendors/anchorjs/anchor.min.js"></script>
+  <script src="vendors/is/is.min.js"></script>
+  <script src="vendors/echarts/echarts.min.js"></script>
+  <script src="vendors/fontawesome/all.min.js"></script>
+  <script src="vendors/lodash/lodash.min.js"></script>
+  <script src="vendors/list.js/list.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>
