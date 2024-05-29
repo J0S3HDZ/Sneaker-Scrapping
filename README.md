@@ -12,7 +12,7 @@
 Sneaker-Scrapping uses a number of open source projects to work properly:
 
 - [JavaScript] - App Brain
-- [Boottrap] - powerful, extensible, and feature-packed frontend toolkit.
+- [Bootstrap] - powerful, extensible, and feature-packed frontend toolkit.
 - [Falcon Template] - great responsive web template
 - [node.js] - evented I/O for the backend
 - [jQuery] - duh
