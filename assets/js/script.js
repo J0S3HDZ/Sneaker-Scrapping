@@ -19,10 +19,11 @@ app.listen(3000, () => {
 */
 
 
-new DataTable('#table', {
-    lengthChange: false,
-    pageLength: 4
+new DataTable('#table',{
+    info: false,
+    
 });
+
 
 var country = "";
 var country_language = "";
@@ -42,24 +43,29 @@ async function nikeScrapper() {
     country = 'mx';
     country_language = 'es-419';
     marketplace = 'MX';
-    url =
+
+ url =
         "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=00599D8669476509C2E14905CC1418B4&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(" +
         marketplace + ")%26filter%3Dlanguage(" + country_language +
         ")%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D96%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D24&language=" +
-        country_language + "&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
+        country_language + "&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D"; 
+
     response = await fetch(url);
     var data = await response.json();
     var size = data.data.products.products.length;
     total_prods = data.data.products.pages.totalResources;
     for (anchor; anchor < total_prods; anchor += 60) {
-        url =
+         url =
             "https://api.nike.com/cic/browse/v2?queryid=products&anonymousId=00599D8669476509C2E14905CC1418B4&country=mx&endpoint=%2Fproduct_feed%2Frollup_threads%2Fv2%3Ffilter%3Dmarketplace(" +
             marketplace + ")%26filter%3Dlanguage(" + country_language +
             ")%26filter%3DemployeePrice(true)%26filter%3DattributeIds(16633190-45e5-4830-a068-232ac7aea82c%2C5b21a62a-0503-400c-8336-3ccfbff2a684)%26anchor%3D" +
             anchor + "%26consumerChannelId%3Dd9a5bc42-4b9c-4976-858a-f159cf99c647%26count%3D24&language=" +
-            country_language + "&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D";
+            country_language + "&localizedRangeStr=%7BlowestPrice%7D%20%E2%80%94%20%7BhighestPrice%7D"; 
+        url = url;
         response = await fetch(url);
         data = await response.json();
+        console.log(data);
+
         size = data.data.products.products.length;
         for (let i = 0; i < size; i++) {
             var imageURL = data.data.products.products[i].images.squarishURL;

@@ -1,0 +1,243 @@
+@import url('./reset.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --primary: ;
+    --seconday: ;
+
+    --aqua:  rgb(88, 160, 255);
+    --aqua8: rgba(88, 160, 255,.8);
+    --aqua6: rgba(88, 160, 255,.6);
+    --aqua4: rgba(88, 160, 255,.4);
+    --aqua2: rgba(88, 160, 255,.2);
+
+    --dark: #000;
+    --dark8: rgba(0,0,0,.8);
+    --dark6: rgba(0,0,0,.6);
+    --dark4: rgba(0,0,0,.4);
+    --dark2: rgba(0,0,0,.2);
+
+    --white: #fff;
+    --white8: rgba(255,255,255,.8);
+    --white6: rgba(255,255,255,.6);
+    --white4: rgba(255,255,255,.4);
+    --white2: rgba(255,255,255,.2);
+
+    --gray: #cacaca;
+    --gray8: rgba(202, 202, 202,.8);
+    --gray6: rgba(202, 202, 202,.6);
+    --gray4: rgba(202, 202, 202,.4);
+    --gray2: rgba(202, 202, 202,.2);
+
+    --orange: #f99259;
+    --orange8: rgba(249, 146, 89,.8);
+    --orange6: rgba(249, 146, 89,.6);;
+    --orange4: rgba(249, 146, 89,.4);;
+    --orange2: rgba(249, 146, 89,.2);;
+
+    --purple: rgb(139, 117, 255);
+    --purple8: rgba(139, 117, 255,.8);
+    --purple6: rgba(139, 117, 255,.6);
+    --purple4: rgba(139, 117, 255,.4);
+    --purple2: rgba(139, 117, 255,.2);
+}
+
+body {
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", serif;
+    font-style: normal;
+}
+
+/* NAVBAR */
+.top-nav{
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    height: 64px;
+    border-bottom: 3px solid var(--gray2);
+    align-items: center;
+    padding: 5px;
+    justify-content: space-evenly;
+}
+
+.top-nav-logo {
+    max-height: 100%;
+    height: 50px;
+}
+
+.input-group{
+    background-color: var(--aqua2);
+    padding: 10px 20px ;
+    border-radius: 35px;
+    font-size: 16px;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    transition: all .3s; 
+    
+}
+
+input {
+    border: none;
+    font-family: "Poppins", serif;
+    font-style: normal;
+    outline: none;
+    background-color: transparent;
+    font-weight: 500;
+}
+
+input::placeholder{
+    color: var(--aqua);
+    font-weight: 500;
+} 
+
+.input-group:focus-within {
+    background-color: var(--aqua4);
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 500;
+}
+.nav-list li a {
+    text-decoration: none;
+    color: var(--dark);
+    transition: all .3s;
+}
+
+.nav-list li a:hover{
+    color: var(--aqua);
+}
+
+.btn{
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-family: "Poppins",serif;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-grad{
+    background-size: 300% 100%;
+    background-image: linear-gradient(to right, var(--orange), var(--purple), var(--aqua));
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-grad:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+
+/* SIDENAV */
+
+.sidenav{
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav-option a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.sidenav-dropdown{
+    display: flex;
+    flex-direction: column;
+}
+
+/* CONTENT */
+.sec-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "sidenav main-content";
+}
+
+.sidenav{
+    grid-area: sidenav;
+    padding: 20px;
+}
+
+.main-content{
+    grid-area: main-content;
+    padding: 20px;
+}
+
+.sidenav-option > a {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 25px;
+    transition: .3s all;
+    box-sizing: border-box;
+}
+
+/* .sidenav-option.active > a{
+    background-color: var(--gray2);
+} */
+
+.sidenav-option > a:hover{
+    background-color: var(--gray2);
+}
+
+.sidenav-option > a::after {
+    content: "\f0d7";
+    font-family: "Font Awesome 6 Free"; 
+    font-weight: 900;
+    float: right;
+    margin-left: 5px; 
+}
+
+.sidenav-dropdown > a.active{
+    background-color: var(--aqua2);
+    border-radius: 25px;
+}
+.sidenav-dropdown > a{
+    display: flex;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    padding-left: 40px;
+    margin: 2px 0;
+    width: 100%;
+    font-size: 12px;
+}
+/* TABLES */
+
+.generic-table{
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.generic-table th{
+    background-color: var(--gray2);
+    padding: 10px ;
+}
+.generic-table th:first-child{
+    border-radius: 20px 0 0 0 !important; 
+}
+.generic-table th:last-child{
+    border-radius: 0 20px 0 0 !important;
+}
+
+/* .generic-table td:nth-child(even){
+    background-color: red;
+}
+.generic-table td:nth-child(odd){
+    background-color: rgb(245, 244, 244);
+} */
+
+
+/* RESPONSIVE DESIGN */
